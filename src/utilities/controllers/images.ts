@@ -26,7 +26,7 @@ const resize = (
     .toFile(thumb);
 };
 
-export async function getImage(req: Request, res: Response) {
+export async function getImage(req: Request, res: Response): Promise<unknown> {
   const { name, width, height }: Query = req.query;
   if (!name) {
     return res.status(StatusCodes.OK).send("please provide name");
@@ -59,7 +59,7 @@ export async function getImage(req: Request, res: Response) {
     return res.status(StatusCodes.CREATED).sendFile(thumb);
   }
 
-  res.status(StatusCodes.OK).sendFile(thumb);
+  return res.status(StatusCodes.OK).sendFile(thumb);
 }
 
 export { resize };

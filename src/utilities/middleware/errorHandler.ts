@@ -1,7 +1,7 @@
-import { ErrorRequestHandler } from "express";
+import { ErrorRequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (err, req, res, next): Response => {
   if (err.errno === -4058) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -12,7 +12,9 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
       .status(StatusCodes.BAD_REQUEST)
       .send("Please provide valid inputs");
   }
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Something went wrong");
+  return res
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .send("Something went wrong");
   next;
 };
 
