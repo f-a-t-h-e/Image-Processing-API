@@ -16,10 +16,12 @@ const resize = (
   height: string,
   thumb: string
 ) => {
+  const widthN = Number(width);
+  const heightN = Number(height);
   return sharp(imagePath)
     .resize({
-      width: parseInt(width),
-      height: parseInt(height),
+      width: widthN,
+      height: heightN,
     })
     .toFile(thumb);
 };
@@ -49,7 +51,7 @@ export async function getImage(req: Request, res: Response) {
     "..",
     "images",
     "thumb",
-    `${name}_thumb.jpg`
+    `${name}_thumb-${width}-${height}.jpg`
   );
 
   if (!fs.existsSync(thumb)) {
