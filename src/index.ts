@@ -13,7 +13,7 @@ app.use(express.json());
 // Serve placeholders
 app.use("/api/images", imagesRouter);
 
-app.get("/", (req, res) =>
+app.get("/", (req: Request, res: Response) =>
   res.status(200).send("<h1>Image Processing API</h1>")
 );
 
